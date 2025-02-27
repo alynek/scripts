@@ -3,4 +3,4 @@ import subprocess
 import sys
 
 def main():
-    path = sys.arg[1]
+    path = sys.arg[1] 
