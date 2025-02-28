@@ -15,8 +15,10 @@ def main():
     #validate branch exists
     #get data from branch
     #create zip file
+    #validate bucket name
+    #send to bucket
 
-    print('✅ Chegou até aqui!')
+    print('✅ Build finalizado com sucesso!')
     sys.exit(0)
 
 
