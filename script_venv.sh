@@ -2,8 +2,8 @@ import os
 import subprocess
 import sys
 
-def start():
-    path = sys.arg[1] 
+def main():
+    path = sys.argv[1] 
     validate_path(path)
 
     requirements = os.path.join(path, 'requirements.txt')
@@ -41,5 +41,5 @@ def install_packages(path, requirements):
     except subprocess.CalledProcessorError as e:
         print(f"Error trying to install packages, error: {e}") 
 
-if __name__ == '__start__':
-    start()
+if __name__ == '__main__':
+    main()
