@@ -11,20 +11,24 @@ def main():
 
     validate_path(workspace)
 
-    print('Chegou até aqui!')
+    #TODO: 
+    #validate branch exists
+    #get data from branch
+    #create zip file
+
+    print('✅ Chegou até aqui!')
     sys.exit(0)
 
 
 def validate_required_fields():
-
     if len(sys.argv) < 3:
-        print('A branch e o workspace são obrigatórios')
-        sys.exit(0)
+        print('❌ A branch e o workspace são obrigatórios')
+        sys.exit(1)
 
 def validate_path(path):
     if not os.path.exists(path):
-        print("O diretório do workspace não existe!")
-        sys.exit(-1)
+        print(f"❌ O diretório {path} não existe!")
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()
