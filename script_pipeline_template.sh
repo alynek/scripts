@@ -3,10 +3,11 @@ import sys
 import subprocess
 
 def main():
+
+    validate_required_fields()
+
     branch = sys.argv[1]
     workspace = sys.argv[2]
-
-    validate_fields(branch, workspace)
 
     validate_path(workspace)
 
@@ -14,19 +15,15 @@ def main():
     sys.exit(0)
 
 
-def validate_fields(branch, workspace):
+def validate_required_fields():
 
-    if not branch:
-        print('O campo da branch é obrigatório')
-        sys.exit(-1)
-
-    if not workspace:
-        print('O workspace é obrigatório')
-        sys.exit(-1)
+    if len(sys.argv) < 3:
+        print('A branch e o workspace são obrigatórios')
+        sys.exit(0)
 
 def validate_path(path):
     if not os.path.exists(path):
-        print("O diretório do workkdpace não existe!")
+        print("O diretório do workspace não existe!")
         sys.exit(-1)
 
 if __name__ == '__main__':
