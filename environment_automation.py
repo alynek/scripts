@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 
-def main():
+def start():
     path = sys.arg[1] 
     validate_path(path)
 
@@ -32,4 +32,14 @@ def create_environment(path):
 def install_packages(path, requirements):
     validate_path(requirements)
 
-    subprocess.run(['pip install', requirements], check=True)
+    venv_path = os.path.join(path, 'venv', 'bin', 'activate')
+    subprocess.run(['source', venv_path], shell=True)
+
+    try:
+        subprocess.run(['pip', 'install', '-r', requirements], check=True)
+        print("Packages sucessfully installed")
+    except subprocess.CalledProcessorError as e:
+        print(f"Error trying to install packages, error: {e}") 
+
+if __name__ == '__start__':
+    start()
