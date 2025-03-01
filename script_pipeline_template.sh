@@ -1,8 +1,11 @@
 import os
 import sys
 import subprocess
+import shutil
 
+#Existing variables in jenkins with valid path in machine
 jobName = 'myJobProject'
+deploy_path = '../deploy'
 
 def main():
 
@@ -16,8 +19,9 @@ def main():
 
     setup_repository(workspace, repository, branch)
 
+    create_package(workspace)
+
     #TODO: 
-    #create zip file
     #validate bucket name
     #send to bucket
 
@@ -35,6 +39,7 @@ def setup_repository(workspace, repo_url, branch):
     if not os.path.exists(repo_path) or not os.path.exists(os.path.join(repo_path, ".git")):
 
         run_command(f"git clone --branch {branch} {repo_url} {repo_path}")
+        os.chdir(repo_path)
 
     else:
         print(f"\n🔄 Repositório já existe, indo para a branch '{branch}'...")
@@ -46,6 +51,23 @@ def setup_repository(workspace, repo_url, branch):
         run_command(f"git pull origin {branch}")
 
         print(f"\n✅  Branch '{branch}' pronta para o build!")
+
+def create_package(workspace):
+
+    print(f"\n🚀 Iniciando criação do pacote em: {workspace}")
+
+    print(f"Voltando um nível para: {workspace}")
+    os.chdir('..')
+
+    repo_path = os.path.join(workspace, jobName) 
+    print(f"Caminho de origem: {repo_path}")
+
+    zip_file = os.path.join(deploy_path, jobName)
+    print(f"Caminho de destino: {zip_file}")
+
+    shutil.make_archive(zip_file, 'zip', repo_path)
+    
+    print(f"📦 ZIP criado e movido para: {deploy_path}/{jobName}.zip")
 
 def run_command(command):
     print(f"\n🔹 Executando: {command}")
