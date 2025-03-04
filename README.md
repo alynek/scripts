@@ -6,6 +6,7 @@ python3 script_pipeline_template.sh 'branch' 'workspace' 'repo'
 
 commands tests:
 
-python3 script_pipeline_template.sh 'main' '../workspace' 'https://github.com/alynek/issue_tracking_system.git'
+python3 script_pipeline_template.sh 'main' '../workspace' 'https://github.com/alynek/ascii_art'
 
-python3 script_pipeline_template.sh 'production' '../workspace' 'https://github.com/alynek/issue_tracking_system.git'
+start jenkins:
+    sudo service jenkins start
