@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    
+    parameters {
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Nome da branch para o build')
+    }
+    
+    environment {
+        PYTHON_CMD = "${env.PYTHONPATH}"
+        WORKSPACE_PATH = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace"
+        REPO_URL = "https://github.com/alynek/ascii_art.git"
+    }
+    
+    stages {
+        stage('Run Python Script') {
+            steps {
+                script {
+                    echo "Branch selecionada: ${params.BRANCH}"
+                    echo "Executando com Python: ${env.PYTHONPATH}"
+                    bat "${PYTHON_CMD} C:\\Users\\alyne\\source\\repos\\scripts\\script_pipeline_template.py ${params.BRANCH} ${WORKSPACE_PATH} ${REPO_URL}"
+                }
+            }
+        }
+    }
+}
